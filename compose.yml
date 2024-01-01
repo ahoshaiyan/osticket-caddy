@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+    logging:
+      driver: local
+      options:
+        max-size: 1g
+    links:
+      - db:mysql
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: 4943bf87ae7e63d05c91d1a4e193b8d3
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: 8414c7efc2e536b1ef1bedccd7809117
+      MYSQL_DATABASE: osticket
+    volumes:
+      - ./mariadb:/var/lib/mysql
